@@ -22,4 +22,5 @@ class Controller
     param = @view.delete_gossip
     Gossip.delete(param)
   end
+  
 end

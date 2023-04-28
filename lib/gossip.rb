@@ -24,8 +24,8 @@ class Gossip
   end
 
   def self.delete(param)
-    table = CSV.table("db/gossip.csv")
-    table.delete_if.with_index{|row, index| (index + 2) == param}
-    File.open("db/gossip.csv", "w") {|f| f.write(table.to_csv)}  
+    table = CSV.parse(File.read("db/gossip.csv"), headers:false)
+    table.delete_at(param - 1)
+    CSV.open("db/gossip.csv", "w"){|content| table.each{|line| content << line}}
   end
 end
